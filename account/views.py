@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.contrib.auth import login, logout
-from django.contrib.auth.models import User
+from account.models import User
 from django.http import HttpRequest, Http404
 from django.shortcuts import render, redirect, reverse
 from django.views import View
@@ -61,9 +61,9 @@ class LoginView(View):
                     login(request, user)
                     return redirect(reverse('all_posts'))
                 else:
-                    login_form.add_error("email", 'اطلاعات وارد شده نادرست می باشد')
+                    login_form.add_error("username", 'اطلاعات وارد شده نادرست می باشد')
             else:
-                login_form.add_error("email", 'اطلاعات وارد شده نادرست می باشد')
+                login_form.add_error("username", 'اطلاعات وارد شده نادرست می باشد')
 
         context = {'login_form': login_form}
         return render(request, 'account/login_page.html', context)
@@ -72,7 +72,7 @@ class LoginView(View):
 class LogoutView(View):
     def get(self, request):
         logout(request)
-        return redirect(reverse('index_page'))
+        return redirect(reverse('welcome_page'))
 
 
 class ForgetPasswordView(View):

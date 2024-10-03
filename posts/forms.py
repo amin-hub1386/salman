@@ -2,7 +2,7 @@ from django import forms
 from django.utils.translation.template import context_re
 from select import select
 
-from posts.models import Post, PostCategory, File
+from posts.models import Post, PostCategory
 
 
 class CommentForm(forms.Form):
@@ -12,7 +12,7 @@ class CommentForm(forms.Form):
 class CreatePostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content', 'category', 'image']
+        fields = ['title', 'content', 'category','image']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'content': forms.Textarea(attrs={'class': 'form-control'}),
@@ -21,7 +21,5 @@ class CreatePostForm(forms.ModelForm):
         }
 
 
-class FileForm(forms.ModelForm):
-    class Meta:
-        model = File
-        fields = ['file']
+
+

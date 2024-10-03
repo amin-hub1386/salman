@@ -1,6 +1,7 @@
 from datetime import timezone, datetime
 
-from django.contrib.auth.models import User
+from account.models import User
+
 from django.db import models
 
 
@@ -17,7 +18,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     category = models.ForeignKey(PostCategory, on_delete=models.CASCADE)
     content = models.TextField()
-    image = models.ImageField(upload_to='posts/', blank=True)
+    image = models.FileField(upload_to='posts/')
     date_posted = models.DateTimeField(default=datetime.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -35,5 +36,4 @@ class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
-class File(models.Model):
-    file = models.FileField(upload_to='posts')
+
